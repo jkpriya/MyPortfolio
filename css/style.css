@@ -1,0 +1,96 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+h1,h4{
+    background-color: rgb(190, 184, 175);
+    width:100%;
+    font-style: italic;
+    font-variant: small-caps;
+}
+
+main{
+    margin-left:1%;
+}
+section{
+    margin-top: 5px;  /*All sections should have a top margin of 5 px */
+
+}
+
+form{
+
+    border:1.5px solid bisque;
+    background-color: bisque;
+    padding:5px;
+    border:2px solid rgb(73, 4, 4);
+    border-radius: 2%;
+    margin:2%
+    
+   
+}
+
+nav 
+{
+    
+    font-style:cursive;
+    color:darkgoldenrod;
+    font-style: italic;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: 30;
+}
+.cars h4{
+    background: none;
+}
+.enquires{
+    align-content: center;
+}
+.card{
+    border: 1px solid goldenrod;
+    border-radius: 10%;
+    margin:2%;
+}
+.card img{
+    height: 200px;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+}
+
+/* NavItems */
+#navbarNav
+{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style:cursive;
+    font-stretch: ultra-condensed;
+    justify-content: flex-end;/* Moving NAV items to right */
+}
+
+h1{
+    text-align: center;
+    padding:1px;
+    font-style: italic;
+    font-variant: small-caps;
+    
+}
+
+
+#map{
+    border:3px solid black;
+    height:400px;
+    width:400px;
+}
+#submitButton
+{
+    background-color: rgb(236, 150, 44);
+    justify-self: center;
+    border:1px solid rgb(73, 4, 4) ;
+}
+#back{
+    justify-content: right;
+}
+#vgimg{
+    height:100px;
+    width:100px;
+}
+
