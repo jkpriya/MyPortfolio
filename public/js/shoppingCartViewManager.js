@@ -2,6 +2,8 @@ class ViewManager {
     #productCatalogManager;
     #cartManager;
     #priceCalculator;
+    // #baseUrl = "http://192.168.0.55:3000"
+    #baseUrl = "https://www.jkpriya.com"
 
     constructor(productCatalogManager, cartManager, priceCalculator) {
         this.#productCatalogManager = productCatalogManager;
@@ -14,7 +16,7 @@ class ViewManager {
 
         // let products = this.#productCatalogManager.products;
 
-        fetch("http://localhost:3000/products")
+        fetch(`${this.#baseUrl}/products`)
             .then(
                 response => response.json())
             .then(products => {
@@ -39,7 +41,7 @@ class ViewManager {
         var searchKeyword = document.getElementById("search-input").value;
         // let products = this.#productCatalogManager.searchProducts(searchKeyword);
 
-        fetch(`http://localhost:3000/products?keyword=${searchKeyword}`)
+        fetch(`${this.#baseUrl}/products?keyword=${searchKeyword}`)
             .then(
                 response => response.json())
             .then(products => {
@@ -68,7 +70,7 @@ class ViewManager {
 
         //this.#cartManager.updateCartItem(productId, quantity);
 
-        fetch(`http://localhost:3000/cart`, {
+        fetch(`${this.#baseUrl}/cart`, {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -80,7 +82,7 @@ class ViewManager {
 
     deleteCartItem(id) {
         //this.#cartManager.deleteCartItem(id);
-        fetch(`http://localhost:3000/cart/${id}`, {
+        fetch(`${this.#baseUrl}/cart/${id}`, {
             method: 'DELETE',
             mode: 'cors',
         }).then(res => {
@@ -89,7 +91,7 @@ class ViewManager {
     }
 
     loadCartSummaryDetails() {
-        fetch('http://localhost:3000/cartsummary')
+        fetch(`${this.#baseUrl}/cartsummary`)
             .then(res => res.json())
             .then(data => {
                 document.querySelector("tbody").innerHTML = "";
@@ -97,18 +99,21 @@ class ViewManager {
                 let priceCalculatedItems = data.cartSummary.priceCalculatedItems;
 
                 priceCalculatedItems.forEach(priceCalculatedItem => {
-                    let product = this.#productCatalogManager.getProduct(priceCalculatedItem.id);
 
-                    var rowTemplate = document.getElementById("cart-row").content.cloneNode(true);
+                    fetch(`${this.#baseUrl}/products/${priceCalculatedItem.id}`)
+                        .then(res => res.json())
+                        .then(product => {
+                            var rowTemplate = document.getElementById("cart-row").content.cloneNode(true);
 
-                    var tds = rowTemplate.querySelectorAll("td");
-                    tds[0].textContent = product.name;
-                    tds[1].textContent = priceCalculatedItem.quantity;
-                    tds[2].textContent = "$ " + product.price;
-                    tds[3].textContent = "$ " + priceCalculatedItem.lineTotal;
-                    tds[4].innerHTML = `<a href="#summary-table"  style = "color: red;
-            text-decoration: none;" onclick = "viewManager.deleteCartItem(${product.id})">Remove</a>`;
-                    document.querySelector("tbody").appendChild(rowTemplate);
+                            var tds = rowTemplate.querySelectorAll("td");
+                            tds[0].textContent = product.name;
+                            tds[1].textContent = priceCalculatedItem.quantity;
+                            tds[2].textContent = "$ " + product.price;
+                            tds[3].textContent = "$ " + priceCalculatedItem.lineTotal;
+                            tds[4].innerHTML = `<a href="#summary-table"  style = "color: red;
+                                                text-decoration: none;" onclick = "viewManager.deleteCartItem(${product.id})">Remove</a>`;
+                            document.querySelector("tbody").appendChild(rowTemplate);
+                        })
                 });
 
                 document.getElementById("grand-total").textContent = "$ " + data.cartSummary.grandTotal;

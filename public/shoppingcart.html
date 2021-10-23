@@ -13,12 +13,10 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-
-    <script src="js/viewManager.js" defer></script>
-    <script src="js/priceCalculator.js" defer></script>
-    <script src="js/cartManager.js" defer></script>
-    <script src="js/productCatalogManager.js" defer></script>
-    <script src="js/index.js" defer></script>
+    <script src="./js/shoppingCartViewManager.js" defer></script>
+    <script src="./js/shoppingCartIndex.js" defer></script>
+    
+    
 
     <title>ShopBay</title>
   </head>
@@ -146,7 +144,7 @@
           <button
             id="btn-add-to-cart"
             type="submit"
-            onclick="viewManager.addToCart(this); viewManager.loadCartSummaryDetails();"
+            onclick="viewManager.addToCart(this);"
             class="btn  ms-1 p-1"
             style="width: 60%; background-color: rgb(125, 113, 206); color: white; border: 1px solid slateblue;"
           >
