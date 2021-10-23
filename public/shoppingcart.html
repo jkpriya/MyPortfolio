@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <script src="js/viewManager.js" defer></script>
+    <script src="js/priceCalculator.js" defer></script>
+    <script src="js/cartManager.js" defer></script>
+    <script src="js/productCatalogManager.js" defer></script>
+    <script src="js/index.js" defer></script>
+
+    <title>ShopBay</title>
+  </head>
+  <body class="bg-light">
+    <!-- Navbar starts here -->
+    <nav class="navbar navbar-dark  navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+  
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <h1>SHOPBAY</h1>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Add Product cards -->
+
+    <div class="container">
+        <table class="table">
+          <thead>
+            <th style="width: 60%"><h4>Products</h4></th>
+            <th style="width: 30%">
+              <input
+                id="search-input"
+                class="form-control"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+            </th>
+            <th style="width: 10%">
+              <button
+                class="btn btn-outline-dark"
+                type="button"
+                style = "background-color: rgb(125, 113, 206); color:black;"
+                onclick="viewManager.loadFilteredProducts()"
+              >
+                Search
+              </button>
+            </th>
+            <th style="width: 12%">
+              <button
+                class="btn  btn-outline-dark "
+                type="button"
+                style = "background-color: rgb(125, 113, 206); color:black;"
+                onclick="viewManager.loadProducts(); document.getElementById('search-input').value = ''; "
+              >
+                Clear
+              </button>
+            </th>
+          </thead>
+        </table>
+      <div class="row" id="products-container"></div>
+    </div>
+
+    <table id="cart-summary" class="table container table-bordered mt-5">
+      <h4 class="container" id="cart-header">Cart Details</h4>
+      <!-- summary items table will create here -->
+      <thead>
+        <tr>
+          <th scope="col" style="width: 40%">Item Name</th>
+          <th scope="col" style="width: 10%">Quantity</th>
+          <th scope="col" style="width: 20%">Price</th>
+          <th scope="col" style="width: 20%">Line Total</th>
+          <th scope="col" style="width: 10%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Summary details rows  are dynamically  generated -->
+      </tbody>
+    </table>
+
+    <table id="summary-table" class="table container table-bordered">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 70%">Grand Total</th>
+          <th scope="col" style="width: 30%" id="grand-total"></th>
+        </tr>
+      </thead>
+    </table>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+
+  <template id="product-template">
+    <div class="card pt-3 m-2" style="width: 16rem; height:auto ;">
+      <img
+        id="product-image"
+        src=""
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h6 class="card-title text-left" id="product-name">Product Name</h6>
+        <h5 class="card-title" id="product-price">Price</h5>
+        <div class="flex" style="display: flex; flex-direction: row; height: 2rem; ">
+          <input
+            id="product-quantity"
+            type="number"
+            min="0"
+            class="form-control"
+            style="width: 40%;"
+          />
+          <button
+            id="btn-add-to-cart"
+            type="submit"
+            onclick="viewManager.addToCart(this); viewManager.loadCartSummaryDetails();"
+            class="btn  ms-1 p-1"
+            style="width: 60%; background-color: rgb(125, 113, 206); color: white; border: 1px solid slateblue;"
+          >
+            Add To Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="cart-row">
+    <tr>
+      <td class="cart-details"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </template>
+</html>
