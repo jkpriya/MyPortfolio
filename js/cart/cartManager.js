@@ -26,12 +26,10 @@ module.exports =
             else
                 matchedCartItem.quantity = cartObj.quantity; //otherwise update cart quantity
 
-            console.log(this.#cartItems);
         }
     }
     deleteCartItem(id) {
         this.#cartItems = this.#cartItems.filter(item => item.id != id);
-        console.log(this.#cartItems);
     }
 
 }

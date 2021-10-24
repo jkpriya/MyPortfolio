@@ -13,11 +13,17 @@ const cartManager = new cartManagerModule();
 const priceCalculatorModule = require('./js/cart/priceCalculator')
 const priceCalculator = new priceCalculatorModule(prodCatalogManager, cartManager);
 
-app.use(express.static('public'))
+app.use(function(req, res, next){
+	var ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+	console.log(`${new Date().toLocaleString()} : ${ip} : ${req.originalUrl}`)
+	next()	
+},express.static('public'))
 app.use(express.json())
 app.use(cors({ origin: "*" }))
 
 app.get('/products', (req, res) => {
+	var ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+	console.log(`${new Date().toLocaleString()} : ${ip}`)
     res.send(prodCatalogManager.getProducts(req.query.keyword))
 })
 app.get('/products/:id', (req, res) => {
